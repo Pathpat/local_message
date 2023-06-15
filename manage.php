@@ -26,18 +26,19 @@ require_once(__DIR__ . '/../../config.php');
 
 global $DB;
 
+require_login();
 $context = context_system::instance();
+require_capability('local/message:managemessages', $context);
 
 $PAGE->set_url(new moodle_url(url:'/local/message/manage.php'));
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('plugintitle', 'local_message'));
+$PAGE->set_heading(get_string('managemsg', 'local_message'));
+$PAGE->requires->js_call_amd('local_message/confirm');
 
-$messages = $DB->get_records('local_message');
-
-
+$messages = $DB->get_records('local_message', null, 'id');
 
 echo $OUTPUT->header();
-
 $templatecontext = (object)[
   'messages' => array_values($messages),
   'editurl' => new moodle_url('/local/message/edit.php')
