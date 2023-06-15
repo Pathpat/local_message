@@ -33,13 +33,13 @@ class manager {
      * @param string $message_type
      * @return bool true if successful
      */
-    public function create_message(string $message_text, string $messge_type):bool {
+    public function create_message(string $message_text, string $message_type):bool {
         global $DB;
-         $recordtoinsert = new stdClass();
-         $recordtoinsert->messagetext = $fromform->messagetext;
-         $recordtoinsert->messagetype = $fromform->messagetype;
+         $record_to_insert = new stdClass();
+         $record_to_insert->messagetext = $message_text;
+         $record_to_insert->messagetype = $message_type;
          try {
-         return $DB->insert_record('local_message', $recordtoinsert, false);
+         return $DB->insert_record('local_message', $record_to_insert, false);
         } catch (dml_exception $e){
             return false;
         }
