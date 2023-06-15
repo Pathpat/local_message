@@ -40,3 +40,5 @@ $string['managemsg'] = 'Manage messages';
 $string['setting_enable'] = 'Enable';
 $string['setting_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
 $string['manage'] = 'Manage broadcast messages';
+$string['delete_message'] = 'Delete message';
+$string['delete_message_confirm'] = 'Are you sure you want to delete message?';
