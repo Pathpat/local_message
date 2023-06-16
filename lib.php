@@ -54,7 +54,7 @@ function local_message_before_footer(){
          
          $manager->mark_message_read($message->id, $USER->id);
     }
-    
+     
 }
 
 

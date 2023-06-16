@@ -24,7 +24,7 @@
 
 use local_message\form\edit;
 use local_message\manager;
-
+ 
 require_once(__DIR__ . '/../../config.php');
 
 require_login();

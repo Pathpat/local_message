@@ -23,7 +23,7 @@
  */
 
 namespace local_message\form;
-use moodleform;
+use moodleform; 
 
 require_once("$CFG->libdir/formslib.php");
 

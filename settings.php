@@ -26,7 +26,7 @@
 
 
 if ($hassiteconfig) { // needs this condition or there is error on login page
-
+ 
     $ADMIN->add('localplugins', new admin_category('local_message_category', get_string('pluginname', 'local_message')));
 
     $settings = new admin_settingpage('local_message', get_string('pluginname', 'local_message'));

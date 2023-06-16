@@ -23,7 +23,7 @@ class local_message_external extends external_api  {
             ['messageid' => new external_value(PARAM_INT, 'id of message')],
         );
     }
-
+ 
     /**
      * The function itself
      * @return string welcome message

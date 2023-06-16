@@ -24,7 +24,7 @@
  */
 
 
-
+ 
 $string['pluginname'] = 'Broadcast messages';
 $string['enter_message'] = 'Please enter a message';
 $string['manage'] = 'Manage broadcast messages';
