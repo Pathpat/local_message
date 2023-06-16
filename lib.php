@@ -41,10 +41,10 @@ function local_message_before_footer(){
      case 1:
      $type = \core\output\notification::NOTIFY_SUCCESS;
      break;
-     case 2:
+     case 0:
      $type = \core\output\notification::NOTIFY_WARNING;
      break;
-     case 3:
+     case 2:
      $type = \core\output\notification::NOTIFY_ERROR;
      break;
      default:
