@@ -23,22 +23,19 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Display message plugin';
-$string['plugintitle'] = 'Manage messages';
-$string['plugintitleedit'] = 'Edit';
-$string['createmessageform'] = 'You created a message with title';
-$string['updatemessageform'] = 'You updated a message with title';
-$string['cancelmessageform'] = 'You canceled the message form';
-$string['msgtext'] = 'Message text';
-$string['msgtype'] = 'Message Type';
-$string['entermsg'] = 'Please enter a message';
-$string['msgid'] = 'id of message';
-$string['msgdeletesuccess'] = 'True if the message was successfully deleted.';
-$string['managemsg'] = 'Manage messages';
+
+$string['pluginname'] = 'Broadcast messages';
+$string['enter_message'] = 'Please enter a message';
+$string['manage'] = 'Manage broadcast messages';
 $string['setting_enable'] = 'Enable';
 $string['setting_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
-$string['manage'] = 'Manage broadcast messages';
+$string['message_type'] = 'Message type';
+$string['message_text'] = 'Message text';
+$string['message:managemessages'] = 'Manage messages';
+$string['cancelled_form'] = 'You cancelled the message form';
+$string['updated_form'] = 'You updated a message with title ';
+$string['created_form'] = 'You created a message with title ';
+$string['manage_messages'] = 'Manage messages';
 $string['delete_message'] = 'Delete message';
 $string['delete_message_confirm'] = 'Are you sure you want to delete message?';

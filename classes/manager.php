@@ -23,45 +23,48 @@
  */
 
 namespace local_message;
-//exception for any database problem
+
 use dml_exception;
 use stdClass;
 
 class manager {
+
     /** Insert the data into our database table.
      * @param string $message_text
      * @param string $message_type
      * @return bool true if successful
      */
-    public function create_message(string $message_text, string $message_type):bool {
+    public function create_message(string $message_text, string $message_type): bool
+    {
         global $DB;
-         $record_to_insert = new stdClass();
-         $record_to_insert->messagetext = $message_text;
-         $record_to_insert->messagetype = $message_type;
-         try {
-         return $DB->insert_record('local_message', $record_to_insert, false);
-        } catch (dml_exception $e){
+        $record_to_insert = new stdClass();
+        $record_to_insert->messagetext = $message_text;
+        $record_to_insert->messagetype = $message_type;
+        try {
+            return $DB->insert_record('local_message', $record_to_insert, false);
+        } catch (dml_exception $e) {
             return false;
         }
     }
-    
+
     /** Gets all messages that have not been read by this user
      * @param int $userid the user that we are getting messages for
      * @return array of messages
      */
-    public function get_messages(int $userid):array {
+    public function get_messages(int $userid): array
+    {
         global $DB;
-        
         $sql = "SELECT lm.id, lm.messagetext, lm.messagetype 
             FROM {local_message} lm 
-            LEFT OUTER JOIN {local_message_read} lmr ON lm.id = lmr.messageid AND lmr.userid = :userid
-            WHERE lmr.userid IS NULL ";
-        $params =[
+            LEFT OUTER JOIN {local_message_read} lmr ON lm.id = lmr.messageid AND lmr.userid = :userid 
+            WHERE lmr.userid IS NULL";
+        $params = [
             'userid' => $userid,
         ];
         try {
             return $DB->get_records_sql($sql, $params);
-        }catch (dml_exception $e){
+        } catch (dml_exception $e) {
+            // Log error here.
             return [];
         }
     }
@@ -71,15 +74,16 @@ class manager {
      * @param int $userid the user that we are marking message read
      * @return bool true if successful
      */
-    public function mark_message_read(int $message_id, int $userid): bool {
+    public function mark_message_read(int $message_id, int $userid): bool
+    {
         global $DB;
         $read_record = new stdClass();
         $read_record->messageid = $message_id;
         $read_record->userid = $userid;
         $read_record->timeread = time();
-        try{
-          return $DB->insert_record('local_message_read', $read_record, false);
-        }catch (dml_exception $e){
+        try {
+            return $DB->insert_record('local_message_read', $read_record, false);
+        } catch (dml_exception $e) {
             return false;
         }
     }
@@ -88,7 +92,8 @@ class manager {
      * @param int $messageid the message we're trying to get.
      * @return object|false message data or false if not found.
      */
-    public function get_message(int $messageid) {
+    public function get_message(int $messageid)
+    {
         global $DB;
         return $DB->get_record('local_message', ['id' => $messageid]);
     }
@@ -99,30 +104,29 @@ class manager {
      * @param string $message_type the new type for the message.
      * @return bool message data or false if not found.
      */
-    public function update_message(int $messageid, string $message_text, string $message_type): bool {
+    public function update_message(int $messageid, string $message_text, string $message_type): bool
+    {
         global $DB;
         $object = new stdClass();
         $object->id = $messageid;
         $object->messagetext = $message_text;
         $object->messagetype = $message_type;
-        try{
-            return $DB->update_record('local_message', $object, false);
-        }catch (dml_exception $e){
-            return false;
-        }
+        return $DB->update_record('local_message', $object);
     }
+
     /** Delete a message and all the read history.
      * @param $messageid
      * @return bool
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function delete_message($messageid) {
+    public function delete_message($messageid)
+    {
         global $DB;
         $transaction = $DB->start_delegated_transaction();
-        $deleteMessage = $DB->delete_records('local_message', ['id' => $messageid]);
+        $deletedMessage = $DB->delete_records('local_message', ['id' => $messageid]);
         $deletedRead = $DB->delete_records('local_message_read', ['messageid' => $messageid]);
-        if ($deleteMessage && $deletedRead) {
+        if ($deletedMessage && $deletedRead) {
             $DB->commit_delegated_transaction($transaction);
         }
         return true;
