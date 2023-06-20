@@ -47,9 +47,9 @@ class bulkedit extends moodleform {
         $messagegroup[] = $mform->createElement('advcheckbox', 'messageid' . $message->id, $message->messagetext);
         }
         
-        $mform->addGroup($messagegroup, 'messages', 'Choose your messages', '<br>');
+        $mform->addGroup($messagegroup, 'messages',get_string('choose_message', 'local_messages'), '<br>');
         
-        $mform->addElement('static', 'chooseMessages', 'What do you want to do with your selected messages?'); // Add elements to your form
+        $mform->addElement('static', 'chooseMessages', get_string('whattodo', 'local_message')); // Add elements to your form
         
         $choices = array();
         $choices['0'] = \core\output\notification::NOTIFY_WARNING;
@@ -59,7 +59,7 @@ class bulkedit extends moodleform {
         $mform->addElement('select', 'messagetype', get_string('message_type', 'local_message'), $choices);
         $mform->setDefault('messagetype', '3');
         
-        $mform->addElement('advcheckbox', 'deleteall', 'Delete all selected?', 'Yes');
+        $mform->addElement('advcheckbox', 'deleteall', get_string('delete_all_selected', 'local_message'), get_string('yes'));
 
                 
         $this->add_action_buttons();

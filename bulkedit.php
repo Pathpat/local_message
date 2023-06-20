@@ -34,8 +34,8 @@ require_capability('local/message:managemessages', $context);
 
 $PAGE->set_url(new moodle_url('/local/message/bulkedit.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Bulk Edit');
-$PAGE->set_heading('Bulk edit your messages');
+$PAGE->set_title(get_string('bulk_edit', 'local_message'));
+$PAGE->set_heading(get_string('bulk_edit_message', 'local_message'));
 
 $messageid = optional_param('messageid', null, PARAM_INT);
 
@@ -64,7 +64,7 @@ if ($mform->is_cancelled()) {
     $manager->update_messages($messageids, $fromform->messagetype);
     }
    }
- redirect($CFG->wwwroot . '/local/message/manage.php', get_string('created_form', 'local_message') . $fromform->messagetext);
+ redirect($CFG->wwwroot . '/local/message/manage.php', get_string('bulk_edit_successful', 'local_message'));
 }
 
 
